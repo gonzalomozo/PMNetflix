@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pnetflix/paginas/inicioSesion.dart';
+import 'package:pnetflix/paginas/inicio_sesion.dart';
 
 class NavBarSuperiorS extends StatelessWidget {
   @override

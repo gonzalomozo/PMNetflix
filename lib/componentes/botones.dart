@@ -1,5 +1,8 @@
+
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pnetflix/componentes/form_inicio_sesion.dart';
 
 class TextoBotones extends StatelessWidget {
    
@@ -50,7 +53,7 @@ class TextoBotones extends StatelessWidget {
     SizedBox(height: 65.0,),
     ElevatedButton(
            style:ElevatedButtonStyle ,
-                  onPressed: () {/*Navigator.push(context, MaterialPageRoute(builder: (context)=>NewAccount()));*/},
+                  onPressed: () {},
                   child: Text(
                     'Comienza ya',textAlign: TextAlign.center,
                     style: TextStyle(
@@ -62,5 +65,26 @@ class TextoBotones extends StatelessWidget {
        ],
      );
     
+  }
+}
+class TextoInicioSesion extends StatelessWidget {
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        
+      Bounce(
+        infinite: true,
+        child: Image.asset(
+            'assets/2.png',
+            width: 75.0,
+          ),
+      ),
+        SizedBox(height: 10,),
+        Text('¡Disfruta ahora!',style: TextStyle(color: Colors.white  ),)
+      ],
+    );
   }
 }

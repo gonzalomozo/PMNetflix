@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pnetflix/paginas/inicioSesion.dart';
+import 'package:pnetflix/paginas/inicio_sesion.dart';
+import 'package:pnetflix/paginas/registro_usuario.dart';
 
 class NavBarSuperior extends StatelessWidget {
   @override
@@ -28,7 +29,7 @@ class NavBarSuperior extends StatelessWidget {
                   )),
        ElevatedButton(
           style:ElevatedButtonStyle ,
-                  onPressed: () {/*Navigator.push(context, MaterialPageRoute(builder: (context)=>NewAccount()));*/},
+                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>FormRegistroUsuario()));},
                   child: Text(
                     'Registrese ahora',
                     style: TextStyle(

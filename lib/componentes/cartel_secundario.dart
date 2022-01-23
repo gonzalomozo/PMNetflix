@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pnetflix/componentes/nav_bar.dart';
 
-import 'NavbarSecundario.dart';
+import 'navbar_secundario.dart';
 
 class CartelSecundario extends StatelessWidget {
   @override
