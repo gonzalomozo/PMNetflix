@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "404938524530",
+    "project_id": "pnetflix-9f3db",
+    "storage_bucket": "pnetflix-9f3db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404938524530:android:a433a750a94402b8d1ffeb",
+        "android_client_info": {
+          "package_name": "com.example.pnetflix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404938524530-30f6mtq1nctph58hkvubu5lrqj079uac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAWw1qWUMnttM2CRA99pXsNKONiEGRjrw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404938524530-30f6mtq1nctph58hkvubu5lrqj079uac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

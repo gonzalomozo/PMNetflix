@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pnetflix/componentes/botones.dart';
 import 'package:pnetflix/componentes/cartel_secundario.dart';
@@ -18,7 +19,7 @@ class InicioSesion extends StatelessWidget {
           children: <Widget>[            
                     Container(                     
                    padding: EdgeInsets.all(8.0),
-                      child: Flexible(child: FormInicioSesionn(),) ),
+                      child:  FormInicioSesionn(), ),
                              
                 
                 ],

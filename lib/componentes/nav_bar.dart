@@ -15,6 +15,7 @@ class NavBarSuperior extends StatelessWidget {
         Image.asset(
           'assets/1.png',
           width: 30.0,
+         
         ),
         ElevatedButton(
           style:ElevatedButtonStyle ,
@@ -29,7 +30,7 @@ class NavBarSuperior extends StatelessWidget {
                   )),
        ElevatedButton(
           style:ElevatedButtonStyle ,
-                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>FormRegistroUsuario()));},
+                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>RegistroUsuario()));},
                   child: Text(
                     'Registrese ahora',
                     style: TextStyle(

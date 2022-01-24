@@ -88,3 +88,24 @@ class TextoInicioSesion extends StatelessWidget {
     );
   }
 }
+class TextoRegistro extends StatelessWidget {
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        
+      Bounce(
+        infinite: true,
+        child: Image.asset(
+            'assets/2.png',
+            width: 75.0,
+          ),
+      ),
+        SizedBox(height: 10,),
+        Text('¡Registrate sin restricciones!',style: TextStyle(color: Colors.white  ),)
+      ],
+    );
+  }
+}

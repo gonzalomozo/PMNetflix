@@ -1,21 +1,17 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
-class FormInicioSesionn extends StatefulWidget {
+class FormRegistroUsuario extends StatefulWidget {
   
   @override
-  _FormInicioSesionnState createState() => _FormInicioSesionnState();
+  _FormRegistroUsuario createState() => _FormRegistroUsuario();
 }
 
-class _FormInicioSesionnState extends State<FormInicioSesionn> {
-
-String email='';
-  String password='';
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
-
-   final ElevatedButtonStyle = ElevatedButton.styleFrom(
+class _FormRegistroUsuario extends State<FormRegistroUsuario> {
+  
+  final ElevatedButtonStyle = ElevatedButton.styleFrom(
       primary: Colors.redAccent[700],
       onPrimary: Colors.white,
      elevation: 10.0,
@@ -24,7 +20,10 @@ String email='';
       borderRadius: BorderRadius.circular(20)
        ),
     );
-
+  String email='';
+  String password='';
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,7 +36,7 @@ String email='';
               Icons.account_box,size: 40,color: Colors.white,
             ),
              Text(
-                          'Inicie Sesión',
+                          'Registrese ahora',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 38.0,
@@ -48,11 +47,14 @@ String email='';
                         ),
           ],
         ),           
-                 //TextField email       
+                         
               SizedBox(height: 10.0,),
+
+              //TextField email
+              
       StreamBuilder(
     builder: (BuildContext context,AsyncSnapshot snapshot  ){
-  return BounceInRight(
+  return BounceInDown(
     duration: Duration(seconds: 3),
     child: Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -97,10 +99,12 @@ String email='';
     }
     ),
           SizedBox(height: 15.0,),
-          //contraseña de inicion de sesion
-           StreamBuilder(
+
+          //Contrseñaaaaaaaaaaaaaaaaaa
+
+         StreamBuilder(
     builder: (BuildContext context,AsyncSnapshot snapshot  ){
-  return BounceInLeft(
+  return BounceInUp(
     duration: Duration(seconds: 3),
     child: Container(    
      
@@ -144,26 +148,43 @@ String email='';
     }
     ),
           SizedBox(height: 20.0,),
-         StreamBuilder(
+
+          //boton para registrarse
+
+          StreamBuilder(
     builder: (BuildContext context,AsyncSnapshot snapshot  ){
   return ElevatedButton.icon(
   
     style: ElevatedButtonStyle, 
     icon: Icon(Icons.person_pin),
-          label:Text('IniciarSesión',textAlign: TextAlign.center,style: TextStyle(
+          label:Text('Registrar',textAlign: TextAlign.center,style: TextStyle(
         fontSize: 23.0,
         fontWeight: FontWeight.bold,
         color: Colors.white,
       
       ),
       ),
-      
+     
     onPressed: () async {
       try{
         final newUser = 
-        await _auth.signInWithEmailAndPassword(email: email, password: password);
+        await _auth.createUserWithEmailAndPassword(email: email, password: password);
         if(newUser != null){
-         /* Navigator.push(context, MaterialPageRoute(builder: (context)=>InicioSesion()));*/
+          showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Mensaje'),
+          content: const Text('Se ha registrado correctamente porfavor inicie sesión para disfrutar del contenido'),
+          actions: <Widget>[
+           
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK',),
+              child: const Text('OK',),
+              
+            ),
+          ],
+        ),
+      );
         }
       }catch(e){
 
@@ -177,30 +198,4 @@ String email='';
   }
 }
 
-class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: const Text('AlertDialog description'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'Cancel'),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      ),
-      child: const Text('Show Dialog'),
-    );
-  }
-}
