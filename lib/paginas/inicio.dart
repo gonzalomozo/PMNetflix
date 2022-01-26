@@ -7,34 +7,36 @@ class InicioPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Column(
-        children: <Widget>[
-         
-              Stack(
-              children: [
-                SafeArea(child: CartelPrincipal(),),
-                Container(               
-                 padding: const EdgeInsets.only(left: 100,right: 70,top:350,),
-                 alignment: Alignment.center,
-                child:Center(
-                  child: 
-                  Text('Series y péliculas └  ilimitadas y      └  mucho más '
-                  , style: TextStyle(
-                color: Colors.white,
-                fontSize: 29 ,
-                fontWeight: FontWeight.bold,
-                ),
-                 ),
-                
-                 ),
-                ),
-              
-              ],
-             ),
-             TextoBotones(),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
            
-        
+                Stack(
+                children: [
+                  SafeArea(child: CartelPrincipal(),),
+                  Container(               
+                   padding: const EdgeInsets.only(left: 100,right: 70,top:350,),
+                   alignment: Alignment.center,
+                  child:Center(
+                    child: 
+                    Text('Series y péliculas └  ilimitadas y      └  mucho más '
+                    , style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 29 ,
+                  fontWeight: FontWeight.bold,
+                  ),
+                   ),
+                  
+                   ),
+                  ),
+                
+                ],
+               ),
+               TextoBotones(),
+                ],
+             
+          
+        ),
       ),
     );
   }

@@ -15,7 +15,7 @@ class CartelPrincipal extends StatelessWidget {
           children: <Widget>[
             Image.network(
               'https://www.teknofilo.com/wp-content/uploads/2017/10/netflix21-1280x720.jpg',
-              height: 380.0,
+              height: 350.0,
               fit: BoxFit.cover,
             ),
             Container(
