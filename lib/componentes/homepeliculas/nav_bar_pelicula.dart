@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pnetflix/componentes/search/search_delegate.dart';
 
 class NavBarPelicula extends StatelessWidget {
   
@@ -29,7 +30,7 @@ class NavBarPelicula extends StatelessWidget {
             ),
          IconButton(
       icon: Icon(Icons.search_outlined,color: Colors.white,size: 40),
-      onPressed: (){},
+      onPressed: () => showSearch(context: context, delegate: MovieSearchDelegate()),
       ),
       ],
     );

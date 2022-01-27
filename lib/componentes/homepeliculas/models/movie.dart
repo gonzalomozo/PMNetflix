@@ -34,7 +34,9 @@ class Movie {
     bool video;
     double voteAverage;
     int voteCount;
-
+    
+    String? heroId;
+    
     get fullPosterImg{
 
       if (this.posterPath != null)
@@ -43,7 +45,14 @@ class Movie {
 
       return 'https://upload.wikimedia.org/wikipedia/commons/7/74/LA-logo-macchina-fotografica.png';
     }
+ get fullbackdropPath{
 
+      if (this.backdropPath != null)
+
+        return 'https://image.tmdb.org/t/p/w500${this.backdropPath}';
+
+      return 'https://upload.wikimedia.org/wikipedia/commons/7/74/LA-logo-macchina-fotografica.png';
+    }
     factory Movie.fromJson(String str) => Movie.fromMap(json.decode(str));
 
 

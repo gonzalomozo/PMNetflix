@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:pnetflix/paginas/descripcion_pelicula.dart';
 import 'package:pnetflix/componentes/homepeliculas/provider/movies_provider.dart';
 import 'package:pnetflix/paginas/inicio.dart';
+import 'package:pnetflix/paginas/page_home_peliculas.dart';
 import 'package:provider/provider.dart';
 
 import '';
@@ -28,7 +30,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: InicioPage(),
+      
+      debugShowCheckedModeBanner: false,
+      
+      initialRoute: 'home',
+      routes:{
+        'home':( _ )=> InicioPage(),
+        'details':( _ )=> DescripcionPelicula(),
+        },
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:pnetflix/componentes/homepeliculas/cartel_peliculas.dart';
 import 'package:pnetflix/componentes/homepeliculas/peliculas_slider.dart';
 import 'package:pnetflix/componentes/homepeliculas/provider/movies_provider.dart';
 import 'package:provider/provider.dart';
+
 class HomePagePeliculas extends StatelessWidget {
 
 
@@ -19,6 +20,10 @@ class HomePagePeliculas extends StatelessWidget {
             PeliculasSlider(
               movies: moviesProvider.popularMovies,//populares
           title: ('Populares'),
+          onNextPage: ()=> moviesProvider.getPopularMovies(),),
+          PeliculasSlider(
+              movies: moviesProvider.popularMovies,//populares
+          title: ('Proximas Peliculas'),
           onNextPage: ()=> moviesProvider.getPopularMovies(),),
             ],
             ),
