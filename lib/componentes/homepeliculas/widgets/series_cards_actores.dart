@@ -1,0 +1,91 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:pnetflix/componentes/homepeliculas/model/seriescredits_response.dart';
+import 'package:pnetflix/componentes/homepeliculas/models/models.dart';
+import 'package:pnetflix/componentes/homepeliculas/provider/movies_provider.dart';
+import 'package:provider/provider.dart';
+
+
+
+class SeriesCardsActores extends StatelessWidget {
+  
+
+  final int serieId;
+const SeriesCardsActores( this.serieId);
+
+@override
+  Widget build(BuildContext context) {
+     
+     final moviesProvider = Provider.of<MoviesProvider>(context, listen: false);
+     return FutureBuilder(
+         future: moviesProvider.getSeriesCast(serieId),        
+         builder: ( _, AsyncSnapshot<List<CastSeries>> snapshot) {
+           if(!snapshot.hasData){
+             return Container(
+               constraints: BoxConstraints(maxWidth: 150),
+               height:180,
+               child: CupertinoActivityIndicator(),
+             );
+           }
+
+           final List<CastSeries> cast = snapshot.data!;
+
+           return  Container(
+      margin: const EdgeInsets.only(bottom: 30),
+      width: double.infinity,
+      height: 180,
+      
+      child: ListView.builder(
+        itemCount: cast.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: ( _, int index) => _CastCard(cast[index]),
+        )
+    );
+         },
+       );
+
+  }
+}
+class _CastCard extends StatelessWidget {
+  
+   final CastSeries actor;
+
+  const _CastCard( this.actor);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+    
+      width: 100,
+      height: 120,     
+      child:  Column(      
+        children: [       
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Text( 'Actor', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.brown),
+            ),
+          ),    
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20) ,
+            child:  FadeInImage(
+              placeholder: AssetImage('assets/no-image.jpg'),
+               image: NetworkImage(actor.fullprofilePath),
+               height: 120,
+               width: 100,
+               fit: BoxFit.cover
+               ),
+          ),
+          const SizedBox(height: 5,),
+           Text(
+          actor.name,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.center,
+          )
+        ],
+      ),
+    );
+  }
+}

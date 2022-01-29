@@ -4,12 +4,19 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pnetflix/componentes/homepeliculas/helpers/debouncer.dart';
+import 'package:pnetflix/componentes/homepeliculas/model/model.dart';
+import 'package:pnetflix/componentes/homepeliculas/model/model.dart';
+
+import 'package:pnetflix/componentes/homepeliculas/model/series.dart';
+import 'package:pnetflix/componentes/homepeliculas/model/seriescredits_response.dart';
+
 import 'package:pnetflix/componentes/homepeliculas/models/models.dart';
 import 'package:pnetflix/componentes/homepeliculas/models/proximasmovies_response.dart';
 
 import 'dart:convert';
 
 import 'package:pnetflix/componentes/homepeliculas/models/search_response.dart';
+import 'package:pnetflix/componentes/homepeliculas/models/similarmovies_response.dart';
 
 
 class MoviesProvider extends ChangeNotifier{
@@ -21,6 +28,10 @@ List<Movie> onDisplayMovies =[];
 List<Movie> popularMovies =[];
 Map<int, List<Cast>> moviesCast ={};
 List<Movie> uncomingMovies =[];
+ List<Movie> similarMovies =[];
+
+ Map<int, List<CastSeries>> seriesCast ={};
+ List<Serie> seriesPopular =[];
 
 int _popularPage = 0;
 
@@ -37,6 +48,8 @@ MoviesProvider(){
   this.getOnDisplayMovies();
   this.getPopularMovies();
   this.getUncomingMovies();
+  this.getSimilarMovies();
+  this.getSeriesPopular();
 }
 
 Future<String>_getJsonData(String endpoint,[int page = 1]) async{
@@ -89,6 +102,33 @@ getUncomingMovies()async{
   notifyListeners();
 }
 
+
+getSimilarMovies()async{
+ 
+    _popularPage++;
+
+  final jsonData = await this._getJsonData('3/movie/249070/similar', _popularPage);
+  final similarMovieResponse = SimilarMovieResponse.fromJson(jsonData);
+  
+  similarMovies = [...similarMovies, ...similarMovieResponse.results];
+
+  notifyListeners();
+}
+
+getSeriesPopular()async{
+ 
+   _popularPage++;
+
+  final jsonData = await this._getJsonData('3/tv/popular', _popularPage);
+  final seriesSliderResponse =SeriesSliderResponse.fromJson(jsonData);
+  
+  seriesPopular = [...seriesPopular, ...seriesSliderResponse.results];
+
+  notifyListeners();
+}
+
+
+
 Future<List<Cast>> getMovieCast(int movieId)async{
 
   if(moviesCast.containsKey(movieId)) return moviesCast[movieId]!;
@@ -101,6 +141,22 @@ moviesCast[movieId] = creditsResponse.cast;
 return creditsResponse.cast;
 
 }
+
+//los actores de las series
+Future<List<CastSeries>> getSeriesCast(int serieId)async{
+
+  if(moviesCast.containsKey(serieId)) return seriesCast[serieId]!;
+//revisar el mapa
+print('pidiendo info al servidor cast');
+
+final jsonData = await this._getJsonData('3/tv/$serieId/credits');
+final seriescreditsResponse = SeriesCreditosResponse.fromJson(jsonData);
+seriesCast[serieId] = seriescreditsResponse.cast;
+return seriescreditsResponse.cast;
+
+}
+
+
 Future<List<Movie>> searchMovies(String query) async{
 final url =
       Uri.https( _baseUrl,'3/search/movie', {

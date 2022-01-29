@@ -30,11 +30,12 @@ class CartelPeliculas extends StatelessWidget {
       children: <Widget>[
        Stack(
           children: <Widget>[
-            Image.network(
-              'https://www.teknofilo.com/wp-content/uploads/2017/10/netflix21-1280x720.jpg',
-              height: 380.0,
-              fit: BoxFit.cover,
-            ),
+           FadeInImage(
+          placeholder: NetworkImage('https://www.teknofilo.com/wp-content/uploads/2017/10/netflix21-1280x720.jpg'),
+          image: NetworkImage( 'https://s10.gifyu.com/images/Mi-video3.gif' ),
+          height: 380.0 ,
+          fit: BoxFit.cover,
+          ),
            Container(
       width: double.infinity,
       height: size.height * 0.5,

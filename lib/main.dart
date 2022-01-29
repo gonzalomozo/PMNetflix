@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pnetflix/paginas/descripcion_pelicula.dart';
 import 'package:pnetflix/componentes/homepeliculas/provider/movies_provider.dart';
+import 'package:pnetflix/paginas/descripcion_series.dart';
 import 'package:pnetflix/paginas/inicio.dart';
 import 'package:pnetflix/paginas/page_home_peliculas.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
       routes:{
         'home':( _ )=> InicioPage(),
         'details':( _ )=> DescripcionPelicula(),
+        'series':( _ )=> DescripcionSeries(),
         },
     );
   }
