@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pnetflix/componentes/homepeliculas/models/models.dart';
+import 'package:pnetflix/componentes/homepeliculas/models/trailers_response.dart';
 import 'package:pnetflix/componentes/homepeliculas/widgets/casting_cards.dart';
 
 
 class DescripcionPelicula extends StatelessWidget {
-  
+    
   @override
   Widget build(BuildContext context) {
+    
      // Todo cambiar luego por una instancia movie
     final Movie movie =
         ModalRoute.of(context)!.settings.arguments as Movie; 
         print(movie.title);
+
 
     return Scaffold(
       body: CustomScrollView(
@@ -19,6 +22,7 @@ class DescripcionPelicula extends StatelessWidget {
           
         SliverList(
           delegate: SliverChildListDelegate([
+          
           _PosterAndTitle(movie),
           _Overview(movie),
            _Overview(movie),
@@ -37,6 +41,7 @@ class DescripcionPelicula extends StatelessWidget {
 }
 class _CustomAppBar extends StatelessWidget {
   final Movie movie;
+ 
   const _CustomAppBar ( this.movie );
 
   @override
@@ -61,20 +66,27 @@ class _CustomAppBar extends StatelessWidget {
             textAlign:TextAlign.center,  
             ),
         ),
-        background: FadeInImage(
-          placeholder: AssetImage('assets/netflix-loading.gif'),
-          image: NetworkImage(movie.fullbackdropPath),
-          fit: BoxFit.cover,
-        ),
+        background: 
+            
+           FadeInImage(
+            placeholder: AssetImage('assets/netflix-loading.gif'),
+            image: NetworkImage(movie.fullbackdropPath),
+            fit: BoxFit.cover,
+          ),
+          
+         
+       
+       
       ),
     );
   }
 }
 
 class _PosterAndTitle extends StatelessWidget {
- 
+   
 final Movie movie;
-  const _PosterAndTitle ( this.movie );
+
+  const _PosterAndTitle ( this.movie,  );
 
   @override
   Widget build(BuildContext context) {
@@ -87,14 +99,29 @@ final size = MediaQuery.of(context).size;
       child: Row(children: [
         Hero(
           tag: movie.heroId!,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: FadeInImage(placeholder: AssetImage('assets/no-image.jpg'), 
-            image: NetworkImage(movie.fullPosterImg),
-            height: 150,
-            width: 110,
-           
-            ),
+          child: Stack(children: [
+           ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(placeholder: AssetImage('assets/no-image.jpg'), 
+              image: NetworkImage(movie.fullPosterImg),
+              height: 150,
+              width: 110,
+             
+              ),
+              
+            ),Container(
+              alignment: Alignment.center,
+               padding: const EdgeInsets.only( left:5,top:20,),
+            child: GestureDetector(  
+              
+             onTap: () => Navigator.pushNamed(context, 'video',arguments: movie , ),
+             
+              
+                child: ClipRRect(
+                  
+                  child: Image(image: AssetImage('assets/b.png'),width: 100,height: 100,alignment: Alignment.center,)
+                )
+                ),),],
           ),
         ),
      SizedBox(width: 20,),
@@ -128,6 +155,26 @@ class _Overview extends StatelessWidget {
   
 final Movie movie;
   const _Overview ( this.movie );
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+     
+      padding: EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+      child: Text( movie.overview,
+      textAlign: TextAlign.justify,
+      style:Theme.of(context).textTheme.subtitle1,
+      
+      ),
+      
+      );
+      
+    
+  }
+}
+class _video extends StatelessWidget {
+  
+final Movie movie;
+  const _video ( this.movie );
   @override
   Widget build(BuildContext context) {
     return Container(

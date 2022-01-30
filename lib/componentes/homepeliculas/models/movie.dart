@@ -18,6 +18,8 @@ class Movie {
         required this.video,
         required this.voteAverage,
         required this.voteCount,
+
+        
     });
 
     bool adult;
@@ -36,6 +38,7 @@ class Movie {
     int voteCount;
     
     String? heroId;
+
 
     get fullPosterImg{
 
@@ -74,6 +77,7 @@ class Movie {
         voteAverage: json["vote_average"].toDouble(),
         voteCount: json["vote_count"],
     );
+//tal ves se borre
 
 }
 

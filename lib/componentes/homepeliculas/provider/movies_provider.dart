@@ -17,6 +17,8 @@ import 'dart:convert';
 
 import 'package:pnetflix/componentes/homepeliculas/models/search_response.dart';
 import 'package:pnetflix/componentes/homepeliculas/models/similarmovies_response.dart';
+import 'package:pnetflix/componentes/homepeliculas/models/trailer.dart';
+import 'package:pnetflix/componentes/homepeliculas/models/trailers_movies_response.dart';
 
 
 class MoviesProvider extends ChangeNotifier{
@@ -32,6 +34,8 @@ List<Movie> uncomingMovies =[];
 
  Map<int, List<CastSeries>> seriesCast ={};
  List<Serie> seriesPopular =[];
+
+Map<int, List<Result>> trailerMovies ={};
 
 int _popularPage = 0;
 
@@ -127,6 +131,18 @@ getSeriesPopular()async{
   notifyListeners();
 }
 
+Future<List<Result>> getTrailerMovies(int trailerId)async{
+
+  if(trailerMovies.containsKey(trailerId)) return trailerMovies[trailerId]!;
+//revisar el mapa
+print('pidiendo info al servidor cast');
+
+final jsonData = await this._getJsonData('3/movie/$trailerId/videos');
+final trailersMoviesResponse = TrailersMoviesResponse.fromJson(jsonData);
+trailerMovies[trailerId] = trailersMoviesResponse.results;
+return trailersMoviesResponse.results;
+
+}
 
 
 Future<List<Cast>> getMovieCast(int movieId)async{
@@ -145,7 +161,7 @@ return creditsResponse.cast;
 //los actores de las series
 Future<List<CastSeries>> getSeriesCast(int serieId)async{
 
-  if(moviesCast.containsKey(serieId)) return seriesCast[serieId]!;
+  if(seriesCast.containsKey(serieId)) return seriesCast[serieId]!;
 //revisar el mapa
 print('pidiendo info al servidor cast');
 
